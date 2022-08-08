@@ -6,8 +6,6 @@ const path = require("path");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-console.log(process.env);
-
 const app = express();
 
 // View engine setup
@@ -56,8 +54,8 @@ app.post("/send", (req, res) => {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"QA Cinema Contact-Us" <qacinemafoxtrot@gmail.com>', // sender address
-    to: "contactqacinema@gmail.com", // list of receivers
+    from: process.env.MAILFROM, // sender address
+    to: process.env.MAILTO, // list of receivers
     subject: "New Customer Enquiry", // Subject line
     text: "", // plain text body
     html: output, // html body
@@ -77,4 +75,6 @@ app.post("/send", (req, res) => {
   });
 });
 
-app.listen(3027, () => console.log("Mailer is now at you service mighty Team-Foxtrot "));
+app.listen(3027, () =>
+  console.log("Mailer is now at you service mighty Team-Foxtrot ")
+);

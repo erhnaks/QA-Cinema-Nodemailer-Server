@@ -76,5 +76,5 @@ app.post("/send", (req, res) => {
 });
 
 app.listen(3027, () =>
-  console.log("Mailer is now at you service mighty Team-Foxtrot ")
+  console.log("Mailer server is now at your service mighty Team-Foxtrot ")
 );

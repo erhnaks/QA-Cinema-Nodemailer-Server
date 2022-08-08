@@ -11,3 +11,6 @@ const app = express();
 
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
+
+// Static folder
+app.use("/public", express.static(path.join(__dirname, "public")));

@@ -4,6 +4,9 @@ const exphbs = require("express-handlebars");
 
 const path = require("path");
 const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+console.log(process.env);
 
 const app = express();
 
@@ -14,7 +17,6 @@ app.set("view engine", "handlebars");
 
 // Static folder
 app.use("/public", express.static(path.join(__dirname, "public")));
-
 
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,8 +46,8 @@ app.post("/send", (req, res) => {
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "qacinemafoxtrot@gmail.com", // generated ethereal user
-      pass: "hqliwscefogfawxi", // generated ethereal password
+      user: process.env.USER, // generated ethereal user
+      pass: process.env.PASS, // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -75,4 +77,4 @@ app.post("/send", (req, res) => {
   });
 });
 
-app.listen(3027, () => console.log("Server started..."));
+app.listen(3027, () => console.log("Mailer is now at you service mighty Team-Foxtrot "));

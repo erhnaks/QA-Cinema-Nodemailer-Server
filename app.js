@@ -4,6 +4,7 @@ const exphbs = require("express-handlebars");
 
 const path = require("path");
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express();
 
@@ -14,7 +15,6 @@ app.set("view engine", "handlebars");
 
 // Static folder
 app.use("/public", express.static(path.join(__dirname, "public")));
-
 
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,8 +44,8 @@ app.post("/send", (req, res) => {
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "qacinemafoxtrot@gmail.com", // generated ethereal user
-      pass: "hqliwscefogfawxi", // generated ethereal password
+      user: process.env.USER, // generated ethereal user
+      pass: process.env.PASS, // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -54,8 +54,8 @@ app.post("/send", (req, res) => {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"QA Cinema Contact-Us" <qacinemafoxtrot@gmail.com>', // sender address
-    to: "contactqacinema@gmail.com", // list of receivers
+    from: process.env.MAILFROM, // sender address
+    to: process.env.MAILTO, // list of receivers
     subject: "New Customer Enquiry", // Subject line
     text: "", // plain text body
     html: output, // html body
@@ -75,4 +75,6 @@ app.post("/send", (req, res) => {
   });
 });
 
-app.listen(3027, () => console.log("Server started..."));
+app.listen(3027, () =>
+  console.log("Mailer server is now at your service mighty Team-Foxtrot ")
+);

@@ -6,6 +6,8 @@ const path = require("path");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+// console.log(process.env); This is to check .env process.
+
 const app = express();
 
 // View engine setup
